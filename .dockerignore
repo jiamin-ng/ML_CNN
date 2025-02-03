@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+cnn_fruits_model.pth  # (Optional: If you prefer copying it separately)

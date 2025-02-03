@@ -1,0 +1,7 @@
+Flask==3.0.1
+pillow==10.1.0
+torch==2.5.1
+torchvision==0.20.1
+matplotlib
+seaborn
+scikit-learn

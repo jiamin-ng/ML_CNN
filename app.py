@@ -5,7 +5,7 @@ from PIL import Image
 import io
 
 # Load saved state_dict and set up the model
-from cnn_fruits import SimpleCNN
+from cnn_model import SimpleCNN
 try:
     model = SimpleCNN()
     model.load_state_dict(torch.load("cnn_fruits_model.pth"))   # Load the weights
@@ -60,4 +60,4 @@ def predict():
         return jsonify({'error': str(e)}), 500
     
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)
