@@ -44,6 +44,12 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: "https://sonarcloud.io"
+      with:
+        args: >
+          -Dsonar.projectKey=ML_CNN
+          -Dsonar.organization=jiamin
+          -Dsonar.sources=.
+          -Dsonar.python.version=3.9
 
   deploy:
     needs: build-and-test
