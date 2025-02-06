@@ -46,8 +46,8 @@ jobs:
         SONAR_HOST_URL: "https://sonarcloud.io"
       with:
         args: >
-          -Dsonar.projectKey=ML_CNN
-          -Dsonar.organization=jiamin
+          -Dsonar.projectKey=jiamin-ng_ML_CNN
+          -Dsonar.organization=jiamin-ng
           -Dsonar.sources=.
           -Dsonar.python.version=3.9
 
