@@ -3,13 +3,14 @@ import torch
 from torchvision import transforms
 from PIL import Image
 import io
+import os
 
 # Load saved state_dict and set up the model
 from cnn_model import SimpleCNN
 try:
     model = SimpleCNN()
     model.load_state_dict(
-        torch.load("cnn_fruits_model.pth")
+        torch.load("cnn_fruits_model.pth", map_location=torch.device('cpu'))
     )   # Load the weights
     model.eval()    # Set model to evaluation mode
     print("Model loaded successfully!")
@@ -67,7 +68,10 @@ def predict():
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+host = os.getenv("FLASK_RUN_HOST", "127.0.0.1")
+port = int(os.getenv("FLAS_RUN_PORT", 5000))
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host=host, port=port)
