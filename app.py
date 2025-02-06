@@ -8,7 +8,9 @@ import io
 from cnn_model import SimpleCNN
 try:
     model = SimpleCNN()
-    model.load_state_dict(torch.load("cnn_fruits_model.pth"))   # Load the weights
+    model.load_state_dict(
+        torch.load("cnn_fruits_model.pth")
+    )   # Load the weights
     model.eval()    # Set model to evaluation mode
     print("Model loaded successfully!")
 except FileNotFoundError:
@@ -22,8 +24,10 @@ transform = transforms.Compose([
     transforms.ToTensor()
 ])
 
+
 # Initialize Flask app
 app = Flask(__name__)
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -32,7 +36,9 @@ def predict():
         return jsonify({'error': 'No file uploaded'}), 400
     
     file = request.files['file']
-    app.logger.debug(f"Received file: {file.filename}, MIME type: {file.mimetype}")
+    app.logger.debug(
+        f"Received file: {file.filename}, MIME type: {file.mimetype}"
+    )
 
     if not file.mimetype.startswith('image/'):
         app.logger.debug("Uploaded file is not an image")
@@ -54,10 +60,12 @@ def predict():
 
         return jsonify({
             'class': predicted_class,
-            'probabilities': {class_mapping[i]: prob for i, prob in enumerate(probabilities)}
+            'probabilities': {class_mapping[i]: prob for i, 
+                              prob in enumerate(probabilities)}
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
