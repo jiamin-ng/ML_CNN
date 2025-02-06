@@ -14,7 +14,9 @@ try:
     model.eval()    # Set model to evaluation mode
     print("Model loaded successfully!")
 except FileNotFoundError:
-    raise RuntimeError("Model file not found. Ensure 'cnn_fruits_model.pth' exist.")
+    raise RuntimeError(
+        "Model file not found. Ensure 'cnn_fruits_model.pth' exist."
+    )
 except Exception as e:
     raise RuntimeError(f"Error loading model: {e}")
 
@@ -34,7 +36,7 @@ def predict():
     if 'file' not in request.files:
         app.logger.debug("No file uploaded")
         return jsonify({'error': 'No file uploaded'}), 400
-    
+
     file = request.files['file']
     app.logger.debug(
         f"Received file: {file.filename}, MIME type: {file.mimetype}"
@@ -60,7 +62,7 @@ def predict():
 
         return jsonify({
             'class': predicted_class,
-            'probabilities': {class_mapping[i]: prob for i, 
+            'probabilities': {class_mapping[i]: prob for i,
                               prob in enumerate(probabilities)}
         })
     except Exception as e:
