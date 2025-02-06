@@ -5,6 +5,7 @@ from unittest.mock import patch
 from PIL import Image
 import torch
 
+
 @pytest.fixture
 def client():
     """Flask test client setup"""
@@ -24,13 +25,17 @@ def create_test_image():
 
 @patch("app.model")
 def test_predict_valid_image(mock_model, client):
-    """Test valid image upload"""
-    mock_model.return_value = torch.tensor([[0.1, 0.2, 0.6, 0.1]])  # Mock output
+    """Test valid image upload"""  # Mock output
+    mock_model.return_value = torch.tensor([[0.1, 0.2, 0.6, 0.1]])
 
     data = {
         'file': (create_test_image(), 'test.png')
     }
-    response = client.post('/predict', content_type='multipart/form-data', data=data)
+    response = client.post(
+        '/predict',
+        content_type='multipart/form-data',
+        data=data
+    )
 
     assert response.status_code == 200
     json_data = response.get_json()
@@ -41,7 +46,11 @@ def test_predict_valid_image(mock_model, client):
 
 def test_predict_no_file(client):
     """Test API when no file is uploaded"""
-    response = client.post('/predict', content_type='multipart/form-data', data={})
+    response = client.post(
+        '/predict',
+        content_type='multipart/form-data',
+        data={}
+    )
 
     assert response.status_code == 400
     json_data = response.get_json()
@@ -53,7 +62,11 @@ def test_predict_invalid_file(client):
     data = {
         'file': (io.BytesIO(b"This is not an image"), 'test.txt')
     }
-    response = client.post('/predict', content_type='multipart/form-data', data=data)
+    response = client.post(
+        '/predict',
+        content_type='multipart/form-data',
+        data=data
+    )
 
     assert response.status_code == 400
     json_data = response.get_json()
