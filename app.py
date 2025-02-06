@@ -22,7 +22,7 @@ try:
     print("Model loaded successfully!")
 except FileNotFoundError:
     raise RuntimeError(
-        "Model file not found. Ensure 'cnn_fruits_model.pth' exist."
+        "Model file not found. Ensure 'cnn_fruits_model.pth' exists."
     )
 except Exception as e:
     raise RuntimeError(f"Error loading model: {e}")
