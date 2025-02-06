@@ -16,7 +16,7 @@ try:
             f"Model file '{MODEL_PATH}' not found."
         )
     model.load_state_dict(
-        torch.load("cnn_fruits_model.pth")  # nosec 
+        torch.load("cnn_fruits_model.pth")  # nosec
     )   # Load the weights
     model.eval()    # Set model to evaluation mode
     print("Model loaded successfully!")
