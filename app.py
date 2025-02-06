@@ -68,7 +68,8 @@ def predict():
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
+
 host = os.getenv("FLASK_RUN_HOST", "127.0.0.1")
 port = int(os.getenv("FLAS_RUN_PORT", 5000))
 
