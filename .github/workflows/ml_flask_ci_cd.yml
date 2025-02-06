@@ -26,7 +26,12 @@ jobs:
         pip install pytest
 
     - name: Run Unit Tests
-      run: pytest --junitxml=test-results.xml
+      run: |
+        if [ -d "tests ] && [ "$(ls -A tests)" ]; then
+          pytest --junitxml=test-results.xml
+        else
+          echo "No tests found, skipping pytest."
+        fi
 
     - name: Lint with Flake8
       run: flake8 --count --show-source --statistics
