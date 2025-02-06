@@ -25,6 +25,7 @@ jobs:
         pip install -r requirements.txt
         pip install pytest
         pip install flake8
+        pip install bandit
 
     - name: Run Unit Tests
       run: |
