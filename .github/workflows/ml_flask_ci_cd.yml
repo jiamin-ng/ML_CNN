@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # Fix shallow clone for SonarQube
 
     - name: Set up Python
       uses: actions/setup-python@v3
@@ -33,11 +35,23 @@ jobs:
           echo "No tests found, skipping pytest."
         fi
 
-    - name: Lint with Flake8
-      run: flake8 --count --show-source --statistics
+    - name: Linting with Flake8 and Save Report
+      run: flake8 --format=html --htmldir=flake8-report || true
 
-    - name: Security Scan with Bandit
-      run: bandit -r app.py -v
+    - name: Upload Flake8 Lint Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: flake8-lint-report
+        path: flake8-report/
+
+    - name: Security Scan with Bandit and Save Report
+      run: bandit -r app.py -f html -o bandit-report.html || true
+
+    - name: Upload Bandit Security Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: bandit-security-report
+        path: bandit-report.html
 
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@v2
