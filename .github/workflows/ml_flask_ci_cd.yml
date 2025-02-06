@@ -67,6 +67,7 @@ jobs:
         username: root
         key: ${{ secrets.DO_SSH_KEY }}
         script: |
+          doctl registry login
           docker pull registry.digitalocean.com/ml-cnn/flask-app:latest
           docker stop flask-container || true
           docker run -d --rm -p 5000:5000 --name flask-container registry.digitalocean.com/ml-cnn/flask-app:latest
