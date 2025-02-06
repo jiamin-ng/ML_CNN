@@ -39,7 +39,7 @@ jobs:
       run: flake8 --format=html --htmldir=flake8-report || true
 
     - name: Upload Flake8 Lint Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: flake8-lint-report
         path: flake8-report/
@@ -48,7 +48,7 @@ jobs:
       run: bandit -r app.py -f html -o bandit-report.html || true
 
     - name: Upload Bandit Security Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: bandit-security-report
         path: bandit-report.html
