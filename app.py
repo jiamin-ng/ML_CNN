@@ -12,7 +12,7 @@ try:
     model.eval()    # Set model to evaluation mode
     print("Model loaded successfully!")
 except FileNotFoundError:
-    raise RuntimeError("Model file not found. Ensure 'cnn_fruits_model.pth' exists.")
+    raise RuntimeError("Model file not found. Ensure 'cnn_fruits_model.pth' exist.")
 except Exception as e:
     raise RuntimeError(f"Error loading model: {e}")
 
