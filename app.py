@@ -5,10 +5,16 @@ from PIL import Image
 import io
 import os
 
+
 # Load saved state_dict and set up the model
 from cnn_model import SimpleCNN
 try:
     model = SimpleCNN()
+    MODEL_PATH = "cnn_fruits_model.pth"
+    if not os.path.exists(MODEL_PATH):
+        raise RuntimeError(
+            f"Model file '{MODEL_PATH}' not found."
+        )
     model.load_state_dict(
         torch.load("cnn_fruits_model.pth", map_location=torch.device('cpu'))
     )   # Load the weights
